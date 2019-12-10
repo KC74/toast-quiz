@@ -1,44 +1,31 @@
 import React, { Component } from 'react'
-import fetch from 'node-fetch'
+import { connect } from 'react-redux'
 import Weather from './Weather'
+import { getWeatherForecast } from '../../redux/modules/weather'
 
 class WeatherContainer extends Component {
-    constructor() {
-        super()
-        this.state = {
-            weather: {
-                ip: null,
-                forecast: null,
-            },
-        }
+    componentDidMount() {
+        // TODO
+        this.props.dispatch(getWeatherForecast())
     }
 
-    async componentDidMount() {
-        try {
-            // Fetch the users ip
-            const ipReq = await fetch('https://api.ipify.org?format=json')
-            // Get the json object
-            const ipJson = await ipReq.json()
-            const { ip } = ipJson
-            if (ip) {
-                const weatherReq = await fetch(
-                    `http://0d2fe5e2.ngrok.io/weather/forecast/${ip}`
-                )
-                const weatherJson = await weatherReq.json()
-                this.setState({ weather: weatherJson })
-            }
-        } catch (e) {
-            console.error(e)
-        }
-    }
     render() {
-        const { ip, forecast } = this.state.weather
-        return (
+        console.log(this.props)
+        const { isLoading, ipData, weatherData } = this.props.weatherData
+        return isLoading || weatherData.isLoading || ipData.isLoading ? (
+            <div className="comp-loading">Loading...</div>
+        ) : (
             <div className="comp-weather container">
-                <Weather ip={ip} forecast={forecast} />
+                <Weather ip={ipData.data} forecast={weatherData.data} />
             </div>
         )
     }
 }
 
-export default WeatherContainer
+// Map our state to props
+const mapStateToProps = store => {
+    const { weatherData } = store
+    return { weatherData }
+}
+
+export default connect(mapStateToProps)(WeatherContainer)

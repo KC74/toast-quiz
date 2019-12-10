@@ -6,7 +6,7 @@ import Weather from '../../containers/Weather'
 import logo from './logo.svg'
 
 // Initialize the store
-const store = configStore()
+export const store = configStore()
 
 class App extends Component {
     render() {

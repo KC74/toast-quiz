@@ -29,9 +29,9 @@ app.set('NODE_ENV', process.env.NODE_ENV)
 var whitelist = [
     'http://localhost',
     'http://localhost:3000',
-    'http://0d2fe5e2.ngrok.io',
-    'https://0d2fe5e2.ngrok.io',
     'http://192.168.0.63:3000',
+    'http://5a695ee3.ngrok.io',
+    'http://5a695ee3.ngrok.io',
 ]
 
 var corsOptionsDelegate = function(req, callback) {
@@ -51,12 +51,16 @@ app.get('/', (req, res) => {
     res.end('Weather App - Backend')
 })
 
-app.get('/weather/forecast/:ip', async (req, res) => {
+app.get('/weather/forecast/welcome/:ip', async (req, res) => {
     try {
         const ip = req.params.ip
         console.log('Incoming forecase request from %s (initial)', ip)
+        const location = await weather.getLocationOfIp(ip)
+        const forecast = await weather.getCurrentForecast(location)
+        console.log(location)
+        console.log(forecast)
         res.writeHead(200)
-        res.end(JSON.stringify({ ip }))
+        res.end(JSON.stringify(forecast))
     } catch (error) {
         res.writeHead(400)
         console.error(error)
@@ -65,7 +69,7 @@ app.get('/weather/forecast/:ip', async (req, res) => {
     }
 })
 
-app.get('/weather/forecast/:coordinates', async (req, res) => {
+app.get('/weather/forecast/cords/:coordinates', async (req, res) => {
     // Grab the cordinates
     const cords = req.params.coordinates
     try {

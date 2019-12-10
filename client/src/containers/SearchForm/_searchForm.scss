@@ -1,0 +1,37 @@
+.searchForm {
+    .form-textfield,
+    button {
+        margin: 0.5rem;
+    }
+
+    .MuiFormLabel-root {
+        color: white;
+        &.Mui-focused {
+            color: white;
+        }
+    }
+
+    .MuiButton-outlined {
+        color: white;
+        border-color: #60dbfc;
+
+        &Primary:hover {
+            border-color: #60dbfc;
+        }
+
+        .MuiInputBase {
+            &:focus {
+                color: white;
+            }
+        }
+    }
+
+    .MuiInputBase-root {
+        color: white;
+    }
+
+    .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
+    .MuiOutlinedInput-notchedOutline {
+        border-color: $color__font-blue;
+    }
+}

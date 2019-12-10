@@ -6,14 +6,10 @@ const Header = props => {
         <header className="App-header">
             {logo && <img src={logo} className="App-logo" alt="logo" />}
             <p>ENV: {process.env.NODE_ENV}</p>
-            <a
-                className="App-link"
-                href="https://reactjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                Learn React
-            </a>
+            <p className="App-link">
+                Enter a zip code below and
+                <br /> press the button.
+            </p>
         </header>
     )
 }

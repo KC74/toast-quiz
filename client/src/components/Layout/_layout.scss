@@ -4,8 +4,10 @@
 
     &.container {
         display: flex;
-        align-content: space-between;
+        justify-content: space-evenly;
         flex-flow: column nowrap;
+        height: 100vh;
+        margin: 1rem;
     }
 
     &.body {

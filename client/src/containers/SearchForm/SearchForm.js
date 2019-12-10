@@ -5,22 +5,20 @@ import Button from '@material-ui/core/Button'
 const SearchForm = props => {
     const { handleSubmit } = props
     return (
-        <div className="searchForm">
+        <div className="form-warpper">
             <form className="searchForm">
                 <FormTextField
                     name="zip"
                     required={props.required}
                     label="Zip Code"
                 />
-                <div>
-                    <Button
-                        variant="outlined"
-                        color="primary"
-                        onClick={handleSubmit}
-                    >
-                        Search Weather
-                    </Button>
-                </div>
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={handleSubmit}
+                >
+                    Search Weather
+                </Button>
             </form>
         </div>
     )

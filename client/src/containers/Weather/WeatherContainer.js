@@ -13,19 +13,23 @@ class WeatherContainer extends Component {
         }
     }
 
-    componentDidMount() {
-        fetch(
-            'http://0d2fe5e2.ngrok.io/weather/forecast/49.2588368,-123.0664131'
-        )
-            .then(async data => {
-                try {
-                    const weather = await data.json()
-                    this.setState({ weather })
-                } catch (error) {
-                    console.error(error)
-                }
-            })
-            .catch(console.error)
+    async componentDidMount() {
+        try {
+            // Fetch the users ip
+            const ipReq = await fetch('https://api.ipify.org?format=json')
+            // Get the json object
+            const ipJson = await ipReq.json()
+            const { ip } = ipJson
+            if (ip) {
+                const weatherReq = await fetch(
+                    `http://0d2fe5e2.ngrok.io/weather/forecast/${ip}`
+                )
+                const weatherJson = await weatherReq.json()
+                this.setState({ weather: weatherJson })
+            }
+        } catch (e) {
+            console.error(e)
+        }
     }
     render() {
         const { ip, forecast } = this.state.weather

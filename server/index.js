@@ -51,20 +51,34 @@ app.get('/', (req, res) => {
     res.end('Weather App - Backend')
 })
 
+app.get('/weather/forecast/:ip', async (req, res) => {
+    try {
+        const ip = req.params.ip
+        console.log('Incoming forecase request from %s (initial)', ip)
+        res.writeHead(200)
+        res.end(JSON.stringify({ ip }))
+    } catch (error) {
+        res.writeHead(400)
+        console.error(error)
+        const response = JSON.stringify(error)
+        res.end(response)
+    }
+})
+
 app.get('/weather/forecast/:coordinates', async (req, res) => {
     // Grab the cordinates
     const cords = req.params.coordinates
     try {
         console.log('incoming request for forecast')
-        res.writeHead(200)
         const forecast = await weather.getCurrentForecast(cords)
         const ip = req.ip
         console.log(`${ip}\\n${forecast}`)
+        res.writeHead(200)
         res.end(JSON.stringify({ ip, forecast }))
     } catch (error) {
-        res.writeHead(400)
         console.error(error)
         const response = JSON.stringify(error)
+        res.writeHead(400)
         res.end(response)
     }
 })

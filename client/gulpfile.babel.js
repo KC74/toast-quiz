@@ -17,7 +17,7 @@ var plumberErrorHandler = {
     }),
 }
 
-gulp.task('sass', () => {
+gulp.task('sass', cb => {
     gulp.src('./src/styles/styles.scss')
         .pipe(plumber(plumberErrorHandler))
         .pipe(sourcemaps.init())
@@ -27,9 +27,10 @@ gulp.task('sass', () => {
         .pipe(rename('style.min.css'))
         .pipe(sourcemaps.write('./maps'))
         .pipe(gulp.dest('./src/styles/build'))
+    cb()
 })
 
-gulp.task('watch', () => {
+gulp.task('watch', cb => {
     // Watch our styles
     gulp.watch(
         [
@@ -37,9 +38,9 @@ gulp.task('watch', () => {
             './src/components/**/*.scss', // Components
             './src/containers/**/*.scss', // Containers
         ],
-        gulp.series('sass')
+        gulp.series('sass') // add more tasks if required
     )
-    // gulp.watch('./js/*.js', ['scripts']);
+    cb()
 })
 
 gulp.task('default', gulp.series('watch'))

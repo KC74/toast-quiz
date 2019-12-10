@@ -3,8 +3,13 @@
  *
  */
 
+@import 'variables';
+
 // Index
 @import 'index';
+
+// General
+@import 'typography';
 
 // Components
 @import '../components/App/app';

@@ -3,9 +3,12 @@
  *
  */
 
-// Components
-@import '../components/App/App';
-@import '../components/Buttons/Buttons';
-
 // Index
 @import 'index';
+
+// Components
+@import '../components/App/app';
+@import '../components/Layout/layout';
+@import '../components/Buttons/buttons';
+@import '../components/Footer/footer';
+@import '../components/Header/header';

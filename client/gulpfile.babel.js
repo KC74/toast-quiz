@@ -37,7 +37,7 @@ gulp.task('watch', () => {
             './src/components/**/*.scss', // Components
             './src/containers/**/*.scss', // Containers
         ],
-        gulp.parallel('sass')
+        gulp.series('sass')
     )
     // gulp.watch('./js/*.js', ['scripts']);
 })

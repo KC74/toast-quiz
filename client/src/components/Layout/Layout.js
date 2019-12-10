@@ -7,7 +7,7 @@ const Layout = props => {
     return (
         <div className="comp-layout container">
             <Header logo={headerLogo} />
-            {props.children}
+            <div className="comp-layout body">{props.children}</div>
             <Footer />
         </div>
     )

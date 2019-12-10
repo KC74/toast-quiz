@@ -55,9 +55,9 @@ app.get('/weather/forecast/welcome/:ip', async (req, res) => {
     try {
         const ip = req.params.ip
         console.log('Incoming forecase request from %s (initial)', ip)
-        const location = await weather.getLocationOfIp(ip)
-        const forecast = await weather.getCurrentForecast(location)
-        console.log(location)
+        const cords = await weather.getCordsByIp(ip)
+        const forecast = await weather.getCurrentForecast(cords)
+        console.log(cords)
         console.log(forecast)
         res.writeHead(200)
         res.end(JSON.stringify(forecast))
@@ -65,6 +65,23 @@ app.get('/weather/forecast/welcome/:ip', async (req, res) => {
         res.writeHead(400)
         console.error(error)
         const response = JSON.stringify(error)
+        res.end(response)
+    }
+})
+
+app.get('/weather/forecast/zip/:zip', async (req, res) => {
+    const zip = req.params.zip
+    try {
+        const cords = await weather.getCordsByZip(zip)
+        const forecast = await weather.getCurrentForecast(cords)
+        console.log(cords)
+        console.log(forecast)
+        res.writeHead(200)
+        res.end(JSON.stringify(forecast))
+    } catch (error) {
+        console.error(error)
+        const response = JSON.stringify(error)
+        res.writeHead(400)
         res.end(response)
     }
 })

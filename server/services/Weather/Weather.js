@@ -5,24 +5,42 @@ export default class Weather {
         // TODO
         this._forecastUrl = 'https://api.darksky.net/forecast'
         this._ipStackUrl = 'http://api.ipstack.com'
+        this._googleUrl =
+            'https://maps.googleapis.com/maps/api/geocode/json?address='
     }
 
-    async getLocationOfIp(ip) {
+    async getCordsByIp(ip) {
         if (!ip) {
             return false
         }
-        console.log('Getting location of: %s', ip)
+        console.log('Getting coordinates by ip: %s', ip)
         try {
             const endpoint = `${this.ipStackUrl}/${ip}?access_key=${process.env.IPSTACK_KEY}`
-            const locationReq = await fetch(endpoint)
-            const locationData = await locationReq.json()
-            let cords
-            if (locationData.latitude && locationData.longitude) {
-                cords = `${locationData.latitude},${locationData.longitude}`
-            }
-            return cords
+            const cordsReq = await fetch(endpoint)
+            const cords = await cordsReq.json()
+            const { latitude, longitude } = cords
+            const cordsString = `${latitude},${longitude}`
+            return cordsString
         } catch (error) {
             console.error(error)
+        }
+    }
+
+    async getCordsByZip(zipcode) {
+        if (!zipcode) {
+            return false
+        }
+        console.log('Getting coordinates by zipcode: %s', zipcode)
+        try {
+            const endpoint = `${this.googleUrl}${zipcode}&key=${process.env.GOOGLE_KEY}`
+            const cordsReq = await fetch(endpoint)
+            const cords = await cordsReq.json()
+            const { lat, lng } = cords.results[0].geometry.location
+            const cordString = `${lat},${lng}`
+            return cordString
+        } catch (error) {
+            console.error(error)
+            return error
         }
     }
 
@@ -31,7 +49,6 @@ export default class Weather {
             return false
         }
         console.log('Getting forecast for cords: %s', cords)
-        // TODO
         try {
             const endpoint = `${this.forecastUrl}/${process.env.DARKSKY_KEY}/${cords}`
             const data = await fetch(endpoint)
@@ -52,11 +69,19 @@ export default class Weather {
         return this._ipStackUrl
     }
 
+    get googleUrl() {
+        return this._googleUrl
+    }
+
     set forecastUrl(forecastUrl) {
         this._forecastUrl = forecastUrl
     }
 
     set ipStackUrl(ipStackUrl) {
         this._ipStackUrl = ipStackUrl
+    }
+
+    set googleUrl(googleUrl) {
+        this._googleUrl = googleUrl
     }
 }

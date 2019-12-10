@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import Weather from './Weather'
+import SearchForm from '../SearchForm/'
 import { getWeatherForecast } from '../../redux/modules/weather'
 
 class WeatherContainer extends Component {
@@ -9,13 +11,23 @@ class WeatherContainer extends Component {
         this.props.dispatch(getWeatherForecast())
     }
 
+    _checkIfLoading(data) {
+        const { isLoading, weatherData, ipData } = data
+        return isLoading || weatherData.isLoading || ipData.isLoading
+    }
+
     render() {
-        console.log(this.props)
-        const { isLoading, ipData, weatherData } = this.props.weatherData
-        return isLoading || weatherData.isLoading || ipData.isLoading ? (
-            <div className="comp-loading">Loading...</div>
+        const { ipData, weatherData } = this.props.weatherData
+        const isLoading = this._checkIfLoading(this.props.weatherData)
+
+        return isLoading ? (
+            <div className="comp-loading">
+                <CircularProgress />
+                <p>Loading Weather Data...</p>
+            </div>
         ) : (
             <div className="comp-weather container">
+                <SearchForm required={true} />
                 <Weather ip={ipData.data} forecast={weatherData.data} />
             </div>
         )

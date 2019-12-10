@@ -1,4 +1,14 @@
 .comp-layout {
     background-color: $color__layout-background;
     color: $color__font-main;
+
+    &.container {
+        display: flex;
+        align-content: space-between;
+        flex-flow: column nowrap;
+    }
+
+    &.body {
+        min-height: 300px;
+    }
 }

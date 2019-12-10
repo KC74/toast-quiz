@@ -152,6 +152,21 @@ const getUserIp = async dispatch => {
     }
 }
 
+export const getForecastByZip = zip => {
+    return async dispatch => {
+        dispatch(getWeatherBegin())
+        try {
+            const endpoint = `http://localhost:8080/weather/forecast/zip/${zip}`
+            const forecastReq = await fetch(endpoint)
+            const forecast = await forecastReq.json()
+            dispatch(getWeatherSuccess(forecast))
+        } catch (error) {
+            dispatch(getWeatherError(error))
+            alert('Error getting the forecast')
+        }
+    }
+}
+
 /**
  *
  * @param {*} coordinates

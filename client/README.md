@@ -1,68 +1,91 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Installation & Setup
 
-In the project directory, you can run:
+In the project directory, first run
 
-### `yarn start`
+### `npm i`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This will load all required modules and libraries. There is no production build, so this is meant only for development and testing purposes.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## First time start up
 
-### `yarn test`
+1. On first run, navigate to the root directory where `gulpfile.babel.js` is and run `gulp sass`. This will transpile all the scss files and create the neccesary min styles if they do not already exist.
+2. Update the package.json's `proxy: "http://localhost:8080"` to the node server's address if required.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Run
 
-### `yarn build`
+To run the app make sure that the backend node server is running first. Then simply use:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `npm start`
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Design Decisions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The app was approached with a "mobile first" mentality and scalability was kept in mind while designing this weather app. Redux was used to create a store to manage state and Thunk was used to create asynchronous dispatch actions. React has a top-down approach but with Redux, we are able to connect the store to any of our components and mapping the states to the props without necessarily passing it all the way down from the top. This lets use manage our states and allows us to dispatch actions easier in a non-blocking manner.
 
-### `yarn eject`
+All stateless components are placed inside the components folder and each have their own scss file that is imported inside of styles.scss in the styles folder. These scss files are watched and automatically transpiled each time by Gulp when a change is detected.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Containers are kept inside of the containers folder and these containers handle all the logic needed for functionality and passes all required props down to our presentational components or stateless components.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Material UI was used for pre-styled components used in making buttons, cards, loading progress, and feedback.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Babel is used so that we can use ESNext syntax.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Components and Containers
 
-## Learn More
+Components:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. App
+2. Buttons
+3. Footer
+4. FormTextField
+5. Header
+6. Icons
+7. Layout
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Containers:
 
-### Code Splitting
+1. SearchForm
+2. Weather
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Packages and Libraries
 
-### Analyzing the Bundle Size
+#### Node Fetch
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+Used to make our requests.
 
-### Making a Progressive Web App
+#### Redux and React-Redux
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Redux is used to manage our store and states, react-redux is required for React bindings.
 
-### Advanced Configuration
+#### Redux Forms
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Used to manage our form fields.
 
-### Deployment
+#### Material Ui
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+Provides stylized presentational components.
 
-### `yarn build` fails to minify
+#### Redux Devtools Extension
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Redux chrome extension to help inspect Redux activity, this includes dispatched actions, states, and more.
+
+#### Redux Logger
+
+Console logs state change and dispatched actions.
+
+#### Thunk
+
+Used in conjunction to Redux to provide asynchronous actions.
+
+#### Babel
+
+Used for ESNext syntax
+
+#### React SVG
+
+Used to inject SVG files
+
+#### Gulp
+
+Automated tasks with watcher

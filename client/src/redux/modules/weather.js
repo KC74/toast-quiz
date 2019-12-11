@@ -156,7 +156,7 @@ export const getForecastByZip = zip => {
     return async dispatch => {
         dispatch(getWeatherBegin())
         try {
-            const endpoint = `http://localhost:8080/weather/forecast/zip/${zip}`
+            const endpoint = `/weather/forecast/zip/${zip}`
             const forecastReq = await fetch(endpoint)
             const forecast = await forecastReq.json()
             dispatch(getWeatherSuccess(forecast))
@@ -169,26 +169,20 @@ export const getForecastByZip = zip => {
 
 /**
  *
- * @param {*} coordinates
  */
-export const getWeatherForecast = coordinates => async dispatch => {
+export const getWeatherForecast = () => async dispatch => {
     dispatch(getWeatherBegin())
-    if (!coordinates) {
-        try {
-            const ip = await getUserIp(dispatch)
-            if (!ip) {
-                dispatch(getWeatherError('Error getting the ip'))
-            } else {
-                const weatherReq = await fetch(
-                    `http://localhost:8080/weather/forecast/welcome/${ip}`
-                )
-                const weatherJson = await weatherReq.json()
-                dispatch(getWeatherSuccess(weatherJson))
-            }
-        } catch (error) {
-            dispatch(getWeatherError(error))
-            alert('Error getting the forecast')
+    try {
+        const ip = await getUserIp(dispatch)
+        if (!ip) {
+            dispatch(getWeatherError('Error getting the ip'))
+        } else {
+            const weatherReq = await fetch(`/weather/forecast/welcome/${ip}`)
+            const weatherJson = await weatherReq.json()
+            dispatch(getWeatherSuccess(weatherJson))
         }
+    } catch (error) {
+        dispatch(getWeatherError(error))
+        alert('Error getting the forecast')
     }
-    // else get by coordinates
 }

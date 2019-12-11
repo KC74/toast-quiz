@@ -27,6 +27,10 @@ class WeatherContainer extends Component {
             </div>
         ) : (
             <div className="comp-weather container">
+                <p className="App-link">
+                    Enter a zip code below and
+                    <br /> press the button.
+                </p>
                 <SearchForm required={true} />
                 <Weather ip={ipData.data} forecast={weatherData.data} />
             </div>

@@ -27,14 +27,15 @@ app.set('NODE_ENV', process.env.NODE_ENV)
  */
 
 var whitelist = [
+    'http://5a695ee3.ngrok.io',
+    'https://5a695ee3.ngrok.io',
     'http://localhost',
     'http://localhost:3000',
     'http://192.168.0.63:3000',
-    'http://5a695ee3.ngrok.io',
-    'http://5a695ee3.ngrok.io',
 ]
 
 var corsOptionsDelegate = function(req, callback) {
+    console.log(req.header('Origin'))
     var corsOptions
     if (whitelist.indexOf(req.header('Origin')) !== -1) {
         corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS responseyeah

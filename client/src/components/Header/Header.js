@@ -1,15 +1,19 @@
 import React from 'react'
+import { ReactSVG } from 'react-svg'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 const Header = props => {
     const { logo } = props
     return (
         <header className="App-header">
-            {logo && <img src={logo} className="App-logo" alt="logo" />}
+            {logo && (
+                <ReactSVG
+                    src={logo}
+                    className="logo"
+                    loading={() => <CircularProgress />}
+                />
+            )}
             <p>ENV: {process.env.NODE_ENV}</p>
-            <p className="App-link">
-                Enter a zip code below and
-                <br /> press the button.
-            </p>
         </header>
     )
 }

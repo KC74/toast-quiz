@@ -6,6 +6,8 @@ In the project directory, first run
 
 This will load all required modules and libraries. There is no production build, so this is meant only for development and testing purposes.
 
+### This server must be started first before the React App will function properly
+
 ## First time start up
 
 1. Create a `.env` file in the root of the project. Inside should container the following:

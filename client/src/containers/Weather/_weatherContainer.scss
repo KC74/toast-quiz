@@ -1,6 +1,15 @@
 .comp-weather {
     &.container {
-        //
-        transition: height 2s ease;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+    }
+
+    .MuiCircularProgress-root {
+        margin: 0 auto;
+    }
+
+    .app-instructions {
+        color: $color__font-blue;
     }
 }

@@ -22,16 +22,16 @@ class WeatherContainer extends Component {
 
         if (isLoading) {
             return (
-                <div className="comp-loading">
+                <div className="comp-weather container loading">
                     <CircularProgress />
-                    <p>Loading Weather Data...</p>
+                    <p>Loading Weather Data</p>
                 </div>
             )
         }
 
         return (
             <div className="comp-weather container">
-                <p className="App-link">
+                <p className="app-instructions">
                     Enter a zip code below and
                     <br /> press the button.
                 </p>

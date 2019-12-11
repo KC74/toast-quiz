@@ -31,6 +31,28 @@ Material UI was used for pre-styled components used in making buttons, cards, lo
 
 Babel is used so that we can use ESNext syntax.
 
+## Future Considerations
+
+1. Implement React-Router and React-Helmet
+
+This app is only intended for development and testing purposes and is not optimized for SEO. In order to optimize SEO for this React app, React-Router and React-Helmet should be considered and implemented.
+
+React Helmet allows us to set meta data and well as document headers.
+
+React Router allows us to define multiple paths and routes for our single page applications. (We really only have 1 page on this app.)
+
+When Helmet and Router are used in conjunction, this will allow Google and other search engine robots to crawl the pages more accurately.
+
+2. Implement Apollo Provider
+
+It is possible to implement Apollo so that we can use web sockets for near real-time updates. Dark Sky's API typically grabs new data every 5 minutes to 1 hour depending on if you're trying to get forecast, or time machine data. Apollo provides an easy way to setup web sockets with a backend node server that's also running Apollo.
+
+The only caveat to this is that it is not neccesary to use Redux anymore because Apollo provides it's own store and cache. And can potentially take time to refactor.
+
+3. Implement GraphQL
+
+GraphQL allows us to query only the required fields needed from the weather data instead of receiving everything.
+
 ## Components and Containers
 
 Components:

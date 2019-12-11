@@ -41,7 +41,7 @@ With Apollo we can easily use web sockets with our front end React app to provid
 
 We can also use GraphQL to help manage queries easier through saving resources. Client-side does not always need every single field provided in the data responses and GraphQL can help leviate that.
 
-4. Implment Data Loader
+4. Implement Data Loader
 
 Cache some of the queries and save on resources.
 

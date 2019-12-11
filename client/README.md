@@ -37,11 +37,11 @@ Babel is used so that we can use ESNext syntax.
 
 This app is only intended for development and testing purposes and is not optimized for SEO. In order to optimize SEO for this React app, React-Router and React-Helmet should be considered and implemented.
 
-React Helmet allows us to set meta data and well as document headers.
+React Helmet allows us to set meta data and as well as document headers.
 
 React Router allows us to define multiple paths and routes for our single page applications. (We really only have 1 page on this app.)
 
-When Helmet and Router are used in conjunction, this will allow Google and other search engine robots to crawl the pages more accurately.
+When Helmet and Router are used in conjunction, this will allow Google and other search engine robots to crawl the pages more accurately resulting in better indexing.
 
 2. Implement Apollo Provider
 

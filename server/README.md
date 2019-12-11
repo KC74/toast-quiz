@@ -10,7 +10,7 @@ This will load all required modules and libraries. There is no production build,
 
 ## First time start up
 
-1. Create a `.env` file in the root of the project. Inside should container the following:
+1. Create a `.env` file in the root of the project. Inside should contain the following:
     - NODE_ENV = 'development'
     - DARKSKY_KEY = 'YOUR_KEY'
     - IPSTACK_KEY = 'YOUR_KEY'

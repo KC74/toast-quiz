@@ -12,6 +12,8 @@ This will load all required modules and libraries. There is no production build,
 
 1. On first run, navigate to the root directory where `gulpfile.babel.js` is and run `gulp sass`. This will transpile all the scss files and create the neccesary min styles if they do not already exist.
 2. Update the package.json's `proxy: "http://localhost:8080"` to the node server's address if required.
+3. If you want to see the Redux Debugger and Chrome extentions tools in action you will have to create a `.env` file in the root of the project with the following variable:
+    - NODE_ENV = 'development'
 
 ## Run
 

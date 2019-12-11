@@ -13,7 +13,9 @@ const Header = props => {
                     loading={() => <CircularProgress />}
                 />
             )}
-            <p>ENV: {process.env.NODE_ENV}</p>
+            <h1 className="title">
+                <span className="toast-span">Toast</span> - Weather App
+            </h1>
         </header>
     )
 }

@@ -20,12 +20,16 @@ class WeatherContainer extends Component {
         const { ipData, weatherData } = this.props.weatherData
         const isLoading = this._checkIfLoading(this.props.weatherData)
 
-        return isLoading ? (
-            <div className="comp-loading">
-                <CircularProgress />
-                <p>Loading Weather Data...</p>
-            </div>
-        ) : (
+        if (isLoading) {
+            return (
+                <div className="comp-loading">
+                    <CircularProgress />
+                    <p>Loading Weather Data...</p>
+                </div>
+            )
+        }
+
+        return (
             <div className="comp-weather container">
                 <p className="App-link">
                     Enter a zip code below and

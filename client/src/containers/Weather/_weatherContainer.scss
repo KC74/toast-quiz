@@ -3,6 +3,13 @@
         display: flex;
         flex-flow: column nowrap;
         justify-content: center;
+        min-height: 200px;
+    }
+    &.component {
+        min-height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .MuiCircularProgress-root {
@@ -11,5 +18,9 @@
 
     .app-instructions {
         color: $color__font-blue;
+    }
+
+    .temp-symbol {
+        color: orange;
     }
 }

@@ -3,6 +3,7 @@ import express from 'express' // express node
 import bodyParser from 'body-parser' // body parsing of requests
 import cors from 'cors' // cross origin settings
 import Weather from './services/Weather'
+import initConfig, { corsConfig } from './config/config.js'
 
 // Instantiate our ENV variables
 // this is only for development purposes, preloading is still the preferred method
@@ -19,25 +20,16 @@ const router = express.Router()
 // Weather client
 export const weather = new Weather()
 
-app.set('HTTP_PORT', 8080)
-app.set('NODE_ENV', process.env.NODE_ENV)
+// Init our config
+initConfig(app)
 
 /**
  * CORS SETUP
  */
-
-var whitelist = [
-    'http://5a695ee3.ngrok.io',
-    'https://5a695ee3.ngrok.io',
-    'http://localhost',
-    'http://localhost:3000',
-    'http://192.168.0.63:3000',
-]
-
-var corsOptionsDelegate = function(req, callback) {
+var corsOptionsDelegate = (req, callback) => {
     console.log(req.header('Origin'))
     var corsOptions
-    if (whitelist.indexOf(req.header('Origin')) !== -1) {
+    if (corsConfig.whitelist.indexOf(req.header('Origin')) !== -1) {
         corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS responseyeah
     } else {
         corsOptions = { origin: false } // disable CORS for this request
@@ -52,6 +44,9 @@ app.get('/', (req, res) => {
     res.end('Weather App - Backend')
 })
 
+/**
+ * GET forecast of initial connection by ip
+ */
 app.get('/weather/forecast/welcome/:ip', async (req, res) => {
     try {
         const ip = req.params.ip
@@ -70,6 +65,9 @@ app.get('/weather/forecast/welcome/:ip', async (req, res) => {
     }
 })
 
+/**
+ * GET forecast by zip
+ */
 app.get('/weather/forecast/zip/:zip', async (req, res) => {
     const zip = req.params.zip
     try {
@@ -87,6 +85,9 @@ app.get('/weather/forecast/zip/:zip', async (req, res) => {
     }
 })
 
+/**
+ * GET forecast by coordinates
+ */
 app.get('/weather/forecast/cords/:coordinates', async (req, res) => {
     // Grab the cordinates
     const cords = req.params.coordinates

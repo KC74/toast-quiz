@@ -1,37 +1,9 @@
 import React from 'react'
 import Icons from '../../components/Icons'
-import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
-
-const useStyles = makeStyles({
-    card: {
-        width: 300,
-        maxWidth: '100%',
-        backgroundColor: '#383e49',
-        margin: '1rem auto',
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-    },
-    location: {
-        fontSize: 14,
-        color: 'orange',
-    },
-    pos: {
-        marginBottom: 12,
-        color: '#ffffff',
-    },
-    info: {
-        color: '#ffffff',
-    },
-    summary: {
-        color: '#60dbfc',
-    },
-})
+import useStyles from './styles.js'
 
 const Weather = props => {
     const { forecast } = props
@@ -60,29 +32,30 @@ const Weather = props => {
                     {forecast.currently.summary}
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                    Temperature: {forecast.currently.temperature} F
+                    Temperature: {forecast.currently.temperature}{' '}
+                    <span className="temp-symbol">F</span>
                 </Typography>
                 <Typography
                     className={classes.info}
                     variant="body2"
                     component="p"
                 >
-                    Apparent Temperature:{' '}
-                    {forecast.currently.apparentTemperature} F
+                    Feels like: {forecast.currently.apparentTemperature}{' '}
+                    <span className="temp-symbol">F</span>
                 </Typography>
                 <Typography
                     className={classes.info}
                     variant="body2"
                     component="p"
                 >
-                    Humidity: {forecast.currently.humidity * 100}
+                    Humidity: {forecast.currently.humidity * 100}%
                 </Typography>
                 <Typography
                     className={classes.info}
                     variant="body2"
                     component="p"
                 >
-                    Cloud Cover: {forecast.currently.cloudCover}
+                    Cloud Cover: {forecast.currently.cloudCover * 100}%
                 </Typography>
             </CardContent>
         </Card>

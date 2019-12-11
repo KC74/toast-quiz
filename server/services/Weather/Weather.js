@@ -22,7 +22,7 @@ export default class Weather {
             const cordsString = `${latitude},${longitude}`
             return cordsString
         } catch (error) {
-            console.error(error)
+            return error
         }
     }
 
@@ -35,11 +35,20 @@ export default class Weather {
             const endpoint = `${this.googleUrl}${zipcode}&key=${process.env.GOOGLE_KEY}`
             const cordsReq = await fetch(endpoint)
             const cords = await cordsReq.json()
+
+            if (!cords.results.length) {
+                const response = {
+                    error: {
+                        message: 'Invalid zip entered.',
+                    },
+                }
+                throw response
+            }
+
             const { lat, lng } = cords.results[0].geometry.location
             const cordString = `${lat},${lng}`
             return cordString
         } catch (error) {
-            console.error(error)
             return error
         }
     }

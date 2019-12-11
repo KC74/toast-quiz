@@ -11,10 +11,10 @@ This will load all required modules and libraries. There is no production build,
 ## First time start up
 
 1. Create a `.env` file in the root of the project. Inside should contain the following:
-    - NODE_ENV = 'development'
-    - DARKSKY_KEY = 'YOUR_KEY'
-    - IPSTACK_KEY = 'YOUR_KEY'
-    - GOOGLE_KEY = 'YOUR_KEY'
+    - `NODE_ENV = 'development'`
+    - `DARKSKY_KEY = 'YOUR_KEY'`
+    - `IPSTACK_KEY = 'YOUR_KEY'`
+    - `GOOGLE_KEY = 'YOUR_KEY'`
 2. Inside of `config -> config.js` update the following:
     - app.set('HTTP_PORT', `YOUR_PORT`)
     - corsConfig whitelist with any addresses that you need to add for cross origins.
@@ -27,21 +27,21 @@ To run the server simply use:
 
 ## Future Considerations
 
-1. Implement Node Helmet
+#### 1. Implement Node Helmet
 
 Better out of the box security for all node servers.
 
-2. Server Side Rendering
+#### 2. Server Side Rendering
 
 Consider some server side rendering for small pre-loads to the client side. This can provide a better user experience.
 
-3. Implement Apollo and GraphQL
+#### 3. Implement Apollo and GraphQL
 
 With Apollo we can easily use web sockets with our front end React app to provide near real-time data.
 
 We can also use GraphQL to help manage queries easier through saving resources. Client-side does not always need every single field provided in the data responses and GraphQL can help leviate that.
 
-4. Implement Data Loader
+#### 4. Implement Data Loader
 
 Cache some of the queries and save on resources.
 
